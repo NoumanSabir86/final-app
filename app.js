@@ -12,10 +12,8 @@ var config = require("config");
 var app = express();
 var cors = require("cors");
 
-var dataURL = process.env.MONGOLAB_URI;
-
 mongoose
-  .connect(dataURL, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
