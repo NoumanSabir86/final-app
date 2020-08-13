@@ -7,6 +7,20 @@
 var app = require("../app");
 var debug = require("debug")("restfulapi:server");
 var http = require("http");
+var mongoose = require("mongoose");
+
+var uristring =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  "mongodb+srv://nouman:loveisislam12@cluster0.1ywqx.mongodb.net/mongoDB0?retryWrites=true&w=majority";
+
+mongoose
+  .connect(uristring, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to Mongo...."))
+  .catch((error) => console.log(error.message));
 
 /**
  * Get port from environment and store in Express.
