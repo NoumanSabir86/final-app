@@ -4,12 +4,22 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+var mongoose = require("mongoose");
+var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/api/users");
 var productsRouter = require("./routes/api/products");
 var config = require("config");
 var app = express();
 var cors = require("cors");
+
+mongoose
+  .connect(config.get("db"), {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to Mongo...."))
+  .catch((error) => console.log(error.message));
+module.exports = app;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -46,5 +56,3 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-module.exports = app;
