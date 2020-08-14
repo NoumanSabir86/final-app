@@ -9,33 +9,36 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/api/users");
 var productsRouter = require("./routes/api/products");
 var config = require("config");
-const app = express();
+var app = express();
 var cors = require("cors");
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(config.get("db"), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to Mongo...."))
   .catch((error) => console.log(error.message));
+module.exports = app;
 
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
 app.use(cookieParser());
 app.use(cors());
-app.use(bodyParser.json());
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/api/products", productsRouter);
 app.use("/api/users", usersRouter);
 app.use(express.static(path.join(__dirname, "client/build")));
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
-
-app.listen(process.env.PORT, () => {
-  console.log("Server started at http://localhost:5001");
 });
 
 // catch 404 and forward to error handler
