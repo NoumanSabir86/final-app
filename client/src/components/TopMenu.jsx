@@ -181,6 +181,86 @@ export default function TopMenu() {
           </Link>
         </Typography>
       </MenuItem>
+
+      {UserServices.isLoggedin
+        ? UserServices.getLoggedinfo().role === "admin" && (
+            <MenuItem>
+              <Link to="/manageProducts" className={classes.link}>
+                <Button
+                  color="secondary"
+                  style={{
+                    color: "black",
+                    backgroundColor: "#FEBD69",
+                    textDecoration: "none",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
+                  }}
+                >
+                  Admin
+                </Button>
+              </Link>
+            </MenuItem>
+          )
+        : ""}
+
+      {!UserServices.isLoggedin ? (
+        <>
+          <MenuItem>
+            <Link to="/login" className={classes.link}>
+              <Button
+                color="secondary"
+                style={{
+                  color: "black",
+                  backgroundColor: "#FEBD69",
+                  textDecoration: "none",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
+                }}
+              >
+                Login
+              </Button>
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/signup" className={classes.link}>
+              <Button
+                color="secondary"
+                style={{
+                  color: "black",
+                  backgroundColor: "#FEBD69",
+                  textDecoration: "none",
+                  paddingLeft: "1rem",
+                  paddingRight: "1rem",
+
+                  marginLeft: "0.1rem",
+                }}
+              >
+                Sign up
+              </Button>
+            </Link>
+          </MenuItem>
+        </>
+      ) : (
+        <MenuItem>
+          <Link className={classes.link}>
+            <Button
+              color="secondary"
+              style={{
+                color: "black",
+                backgroundColor: "#FEBD69",
+                textDecoration: "none",
+                paddingLeft: "1rem",
+                paddingRight: "1rem",
+
+                marginLeft: "0.1rem",
+              }}
+              onClick={UserServices.logout}
+            >
+              Logout
+            </Button>
+          </Link>
+        </MenuItem>
+      )}
     </Menu>
   );
 
