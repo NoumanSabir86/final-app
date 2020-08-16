@@ -1,5 +1,9 @@
 # final-app
 
+Admin credentials:
+Username: admin@gmail.com
+Password: admin123
+
 Heroku link:  https://final-expo.herokuapp.com/
 
 
