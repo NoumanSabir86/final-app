@@ -8,7 +8,9 @@ import {
 const productDetails = (productID) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productID });
-    const { data } = await Axios.get("/api/products/" + productID);
+    const { data } = await Axios.get(
+      "https://final-expo.herokuapp.com/api/products/" + productID
+    );
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {

@@ -5,7 +5,9 @@ import { toast } from "react-toastify";
 
 const addtoCart = (productID, qty) => async (dispatch, getState) => {
   try {
-    const { data } = await Axios.get("/api/products/" + productID);
+    const { data } = await Axios.get(
+      "https://final-expo.herokuapp.com/api/products/" + productID
+    );
 
     dispatch({
       type: CART_ADD_ITEM,
