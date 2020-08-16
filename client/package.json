@@ -1,6 +1,6 @@
 {
   "name": "sasas",
-  "proxy": "https://final-expo.herokuapp.com/",
+  "proxy": "https://final-expo.herokuapp.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

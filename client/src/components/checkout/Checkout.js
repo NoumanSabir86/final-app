@@ -32,10 +32,10 @@ export default function Checkout(props) {
   console.log(total);
 
   async function handleToken(token, addresses) {
-    const response = await Axios.post(
-      "https://final-expo.herokuapp.com/api/products/checkout",
-      { token, total }
-    );
+    const response = await Axios.post("/api/products/checkout", {
+      token,
+      total,
+    });
 
     const { status } = response.data;
 
